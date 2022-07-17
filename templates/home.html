@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Polls{% endblock title %}
+
+{% block style %}
+    body{
+        background-color: aqua;
+        font-size: x-large;
+    }
+{% endblock style %}
+
+{% block content %}
+    {% if questions %}
+        <h1>The newest questions:</h1>
+
+        {% for question in questions %}
+        <a href="{% url 'polls:details' question.id %}">{{question.id}}. {{question.q_text}}</a><br>
+        {% endfor %}
+
+    {% else %}
+        <p>There is no new questions</p>
+    {% endif %}
+{% endblock content %}
+

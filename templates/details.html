@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Details of poll no. {{question.id}}{% endblock title %}
+
+{% block style %}
+    body{
+        background-color: gray;
+        font-size: x-large;
+    }
+{% endblock style %}
+
+{% block content %}
+        <form action="{% url 'polls:vote' question.id%}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend><h1>{{question.q_text}}</h1></legend>
+                {% for choice in question.choice_set.all %}
+                {{forloop.counter}} <input type="radio" name="choice" id="choice{{choice.id}}" value="{{choice.id}}">
+                    <label for="">{{choice.c_text}}</label><br>
+                {% endfor %}
+            </fieldset>
+            <input type="submit" value="Vote">
+        </form>
+
+{% endblock content %}
+
